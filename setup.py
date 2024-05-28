@@ -6,14 +6,19 @@ pg.init()
 pg.display.set_caption("Mastermind")
 
 # screen background globals
-SCREEN_WIDTH = 500
-SCREEN_HEIGHT = 750
-BACKGROUND = pg.transform.scale(pg.image.load("assets/background.jpg"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+SCREEN_WIDTH = 475
+SCREEN_HEIGHT =  850
+BACKGROUND = pg.transform.scale(pg.image.load("assets/background1.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+COVER = pg.transform.scale(pg.image.load("assets/cover.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+COVER1 = pg.transform.scale(pg.image.load("assets/cover1.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+INSTRUCTIONS = pg.transform.scale(pg.image.load("assets/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+ABOUT = pg.transform.scale(pg.image.load("assets/devs.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 HOLE_BACKGROUND = pg.image.load("assets/peg.png")
 SCREEN = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-GAME_FONT = pg.font.Font("assets/OstrichSans-Black.otf", 30)
+GAME_FONT = pg.font.Font("assets/KronaOne.ttf", 40)
+TEXT_FONT = pg.font.Font("assets/Poppins-Bold.ttf", 24)
 TITLE_FONT = pg.font.Font("assets/OstrichSans-Black.otf", 100)
-SUB_TITLE_FONT = pg.font.Font("assets/ostrich-regular.ttf", 50)
+SUB_TITLE_FONT = pg.font.Font("assets/KronaOne.ttf", 20)
 
 # game board globals
 GUESS_GRID = [["" for _ in range(5)] for _ in range(6)]

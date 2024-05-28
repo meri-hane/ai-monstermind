@@ -24,76 +24,80 @@ class Mastermind:
         FileStore.close()
 
     def draw_front_screen(self):
-        SCREEN.blit(BACKGROUND, (0, 0))
-        title_word = TITLE_FONT.render("MASTERMIND", True, (0, 0, 0))
-        title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
-        SCREEN.blit(title_word, title_rect)
+        image_rect = COVER.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(COVER, image_rect)
 
-        front_message = SUB_TITLE_FONT.render("Click this", True, (0, 0, 0))
-        front_rect = front_message.get_rect()
-        front_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        SCREEN.blit(front_message, front_rect)
+        play_button_rect = pg.Rect(0, 0, 200, 50)
+        play_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.55)
+        play_button_word = SUB_TITLE_FONT.render("PLAY", True, (0, 0, 0))
+        play_button_word_rect = play_button_word.get_rect(center=play_button_rect.center)
+        SCREEN.blit(play_button_word, play_button_word_rect)
 
-        button_rect = pg.Rect(0, 0, 400, 50)  # Increase button width for better clickability
-        button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT * 2 / 3)
-        pg.draw.rect(SCREEN, (0, 0, 0), button_rect, 1)
-        button_word = GAME_FONT.render("PROCEED TO START SCREEN", True, (0, 0, 0))
-        button_word_rect = button_word.get_rect(center=button_rect.center)
-        SCREEN.blit(button_word, button_word_rect)
+        howToPlay_button_rect = pg.Rect(0, 0, 200, 50)
+        howToPlay_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.36)
+        howToPlay_button_word = SUB_TITLE_FONT.render("HOW TO PLAY", True, (0, 0, 0))
+        howToPlay_button_word_rect = howToPlay_button_word.get_rect(center=howToPlay_button_rect.center)
+        SCREEN.blit(howToPlay_button_word, howToPlay_button_word_rect)
 
-        # Add "How to Play" button
-        how_to_play_rect = pg.Rect(0, 0, 150, 40)
-        how_to_play_rect.center = (SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT * 2 / 3 + 100)
-        pg.draw.rect(SCREEN, (0, 0, 0), how_to_play_rect, 1)
-        how_to_play_word = GAME_FONT.render("HOW TO PLAY", True, (0, 0, 0))
-        how_to_play_word_rect = how_to_play_word.get_rect(center=how_to_play_rect.center)
-        SCREEN.blit(how_to_play_word, how_to_play_word_rect)
+        aboutUs_button_rect = pg.Rect(0, 0, 200, 50)
+        aboutUs_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.21)
+        aboutUs_button_word = SUB_TITLE_FONT.render("ABOUT US", True, (0, 0, 0))
+        aboutUs_button_word_rect = aboutUs_button_word.get_rect(center=aboutUs_button_rect.center)
+        SCREEN.blit(aboutUs_button_word, aboutUs_button_word_rect)
 
-        # Add "About Us" button
-        about_us_rect = pg.Rect(0, 0, 150, 40)
-        about_us_rect.center = (SCREEN_WIDTH / 2 + 100, SCREEN_HEIGHT * 2 / 3 + 100)
-        pg.draw.rect(SCREEN, (0, 0, 0), about_us_rect, 1)
-        about_us_word = GAME_FONT.render("ABOUT US", True, (0, 0, 0))
-        about_us_word_rect = about_us_word.get_rect(center=about_us_rect.center)
-        SCREEN.blit(about_us_word, about_us_word_rect)
+        return play_button_rect, howToPlay_button_rect, aboutUs_button_rect
+    
+    
+    def draw_difficulty_screen(self):
+        image_rect = COVER.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(COVER, image_rect)
 
-        return button_rect, how_to_play_rect, about_us_rect
+        easy_button_rect = pg.Rect(0, 0, 200, 50)
+        easy_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.55)
+        easy_button_word = SUB_TITLE_FONT.render("EASY", True, (0, 0, 0))
+        easy_button_word_rect = easy_button_word.get_rect(center=easy_button_rect.center)
+        SCREEN.blit(easy_button_word, easy_button_word_rect)
+
+        average_button_rect = pg.Rect(0, 0, 200, 50)
+        average_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.36)
+        average_button_word = SUB_TITLE_FONT.render("AVERAGE", True, (0, 0, 0))
+        average_button_word_rect = average_button_word.get_rect(center=average_button_rect.center)
+        SCREEN.blit(average_button_word, average_button_word_rect)
+
+        hard_button_rect = pg.Rect(0, 0, 200, 50)
+        hard_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.21)
+        hard_button_word = SUB_TITLE_FONT.render("HARD", True, (0, 0, 0))
+        hard_button_word_rect = hard_button_word.get_rect(center=hard_button_rect.center)
+        SCREEN.blit(hard_button_word, hard_button_word_rect)
+
+        return easy_button_rect, average_button_rect, hard_button_rect
+    
 
     def draw_how_to_play_screen(self):
-        SCREEN.blit(BACKGROUND, (0, 0))
-        title_word = TITLE_FONT.render("HOW TO PLAY", True, (0, 0, 0))
+        image_rect = INSTRUCTIONS.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(INSTRUCTIONS, image_rect)
+
+        title_word = GAME_FONT.render("HOW TO PLAY:", True, (241, 245, 249))
         title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
+        title_rect.center = (SCREEN_WIDTH / 2.2, SCREEN_HEIGHT / 14)
         SCREEN.blit(title_word, title_rect)
 
-
-        # Back Button
-        back_button_rect = pg.Rect(0, 0, 150, 40)
-        back_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50)
-        pg.draw.rect(SCREEN, (0, 0, 0), back_button_rect, 1)
-        back_word = GAME_FONT.render("BACK", True, (0, 0, 0))
-        back_word_rect = back_word.get_rect(center=back_button_rect.center)
-        SCREEN.blit(back_word, back_word_rect)
-
-        return back_button_rect
+        return 
 
     def draw_about_us_screen(self):
-        SCREEN.blit(BACKGROUND, (0, 0))
-        title_word = TITLE_FONT.render("ABOUT US", True, (0, 0, 0))
+        image_rect = ABOUT.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(ABOUT, image_rect)
+
+        title_word = GAME_FONT.render("ABOUT US:", True, (241, 245, 249))
         title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
+        title_rect.center = (SCREEN_WIDTH / 2.7, SCREEN_HEIGHT / 14)
         SCREEN.blit(title_word, title_rect)
 
-        # Back Button
-        back_button_rect = pg.Rect(0, 0, 150, 40)
-        back_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50)
-        pg.draw.rect(SCREEN, (0, 0, 0), back_button_rect, 1)
-        back_word = GAME_FONT.render("BACK", True, (0, 0, 0))
-        back_word_rect = back_word.get_rect(center=back_button_rect.center)
-        SCREEN.blit(back_word, back_word_rect)
-
-        return back_button_rect
+        return
 
     def set_difficulty(self, difficulty):
         self.difficulty = difficulty
@@ -104,6 +108,7 @@ class Mastermind:
         elif difficulty == "hard":
             self.pegs = 6
         self.reset_game()
+
 
     @staticmethod
     def draw_guess_grid(guess_grid, x, y):
@@ -219,94 +224,27 @@ class Mastermind:
         # draw submit button
         self.draw_button(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2 + 150, word="SUBMIT")
 
-    @staticmethod
-    def draw_difficulty_title():
-        # draw title
-        title_word = TITLE_FONT.render("MASTERMIND", True, (0, 0, 0))
-        title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
-        SCREEN.blit(title_word, title_rect)
-
-        # draw subtitle
-        subtitle_text = SUB_TITLE_FONT.render("Select Difficulty", True, (0, 0, 0))
-        subtitle_rect = subtitle_text.get_rect()
-        subtitle_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
-        SCREEN.blit(subtitle_text, subtitle_rect)
-
-    @staticmethod
-    def draw_title():
-        # draw title
-        title_word = TITLE_FONT.render("2ND SCREEN", True, (0, 0, 0))
-        title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
-        SCREEN.blit(title_word, title_rect)
-
-        # draw subtitle
-        subtitle_text = SUB_TITLE_FONT.render("Select game mode", True, (0, 0, 0))
-        subtitle_rect = subtitle_text.get_rect()
-        subtitle_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3)
-        SCREEN.blit(subtitle_text, subtitle_rect)
-
-    def draw_codebreaker(self):
-        # codebreaker
-        codebreaker_text = SUB_TITLE_FONT.render("Codebreaker", True, (0, 0, 0))
-        codebreaker_rect = codebreaker_text.get_rect()
-        codebreaker_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        SCREEN.blit(codebreaker_text, codebreaker_rect)
-
-        # codebreaker icon
-        grid_x = SCREEN_WIDTH / 3.75
-        grid_y = SCREEN_HEIGHT / 2 + 45
-        for val in COLOR_CHOICES:
-            pg.draw.circle(SCREEN, GUESS_COLOR_MAP[val], (grid_x, grid_y), GUESS_RADIUS)
-            grid_x += 60
-
-        # codebreaker selection rect
-        window = pg.Rect(100, 340, 300, 110)
-        pg.draw.rect(SCREEN, (0, 0, 0), window, width=1)
-        return window
-
-    def draw_difficulty_screen(self):
-        self.draw_difficulty_title()
-        easy_rect = self.draw_button(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 60, "EASY")
-        average_rect = self.draw_button(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, "AVERAGE")
-        hard_rect = self.draw_button(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 60, "HARD")
-        return easy_rect, average_rect, hard_rect
-
-    @staticmethod
-    def draw_codemaker():
-        # codemaker text
-        codemaker_text = SUB_TITLE_FONT.render("Codemaker", True, (0, 0, 0))
-        codemaker_rect = codemaker_text.get_rect()
-        codemaker_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.4)
-        SCREEN.blit(codemaker_text, codemaker_rect)
-
-        # codemaker icon
-        grid_x = SCREEN_WIDTH / 2 - 32
-        grid_y = SCREEN_HEIGHT / 1.3
-        for i in range(5):
-            if i in (0, 1):
-                SCREEN.blit(pg.transform.scale(HOLE_BACKGROUND, (30, 30)), (grid_x - 15, grid_y - 15))
-                pg.draw.circle(SCREEN, HINT_COLOR_MAP["B"], (grid_x, grid_y), HINT_RADIUS)
-                grid_x += 60
-            elif i == 2:
-                SCREEN.blit(pg.transform.scale(HOLE_BACKGROUND, (30, 30)), (grid_x - 90 - 15, grid_y + 30 - 15))
-                pg.draw.circle(SCREEN, HINT_COLOR_MAP["W"], (grid_x - 90, grid_y + 30), HINT_RADIUS)
-                grid_x = SCREEN_WIDTH / 2 - 30
-            elif i in (3, 4):
-                SCREEN.blit(pg.transform.scale(HOLE_BACKGROUND, (30, 30)), (grid_x - 15, grid_y + 60 - 15))
-                grid_x += 60
-
-        # codebreaker selection rect
-        window = pg.Rect(100, 500, 300, 160)
-        pg.draw.rect(SCREEN, (0, 0, 0), window, width=1)
-
-        return window
-
+    
     def draw_start_screen(self):
-        self.draw_title()
-        self.draw_codebreaker()
-        self.draw_codemaker()
+        image_rect = COVER1.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(COVER1, image_rect)
+
+        breaker_button_rect = pg.Rect(0, 0, 200, 50)
+        breaker_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.55)
+        breaker_button_word = SUB_TITLE_FONT.render("SOLO MODE", True, (0, 0, 0))
+        breaker_button_word_rect = breaker_button_word.get_rect(center=breaker_button_rect.center)
+        SCREEN.blit(breaker_button_word, breaker_button_word_rect)
+
+        maker_button_rect = pg.Rect(0, 0, 200, 50)
+        maker_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.36)
+        maker_button_word = SUB_TITLE_FONT.render("AI vs PLAYER", True, (0, 0, 0))
+        maker_button_word_rect = maker_button_word.get_rect(center=maker_button_rect.center)
+        SCREEN.blit(maker_button_word, maker_button_word_rect)
+
+        return breaker_button_rect, maker_button_rect
+    
+
     @staticmethod
     def validate_guess(guess, ans):
         # iterates through guess and answer lists element-by-element. Whenever it finds a match,
@@ -330,13 +268,14 @@ class Mastermind:
         return hints
 
     def reset_game(self):
-        self.game_status = "start"
+        self.game_status = "play"
         self.win_status = None
         self.guesses_left = 6
         self.current_hole = 0
         self.guess_grid = [["" for _ in range(self.pegs)] for _ in range(6)]
         self.hint_grid = [["" for _ in range(self.pegs)] for _ in range(6)]
         self.answer = random.choices(COLOR_CHOICES, k=self.pegs)
+
 
     def play(self):
         current_time = pg.time.get_ticks()
@@ -351,47 +290,72 @@ class Mastermind:
 
                     # Check if the button on the front screen is clicked
                     if self.game_status == "front":
-                        start_rect = self.draw_front_screen()
-                        if self.game_status == "front":
-                            start_rect, how_to_play_rect, about_us_rect = self.draw_front_screen()
-                            if start_rect.collidepoint(mouse_x, mouse_y):
-                                self.game_status = "start"
-                            elif how_to_play_rect.collidepoint(mouse_x, mouse_y):
-                                self.game_status = "how_to_play"
-                            elif about_us_rect.collidepoint(mouse_x, mouse_y):
-                                self.game_status = "about_us"
-
-                    # Check if the button on the how to play screen is clicked
-                    elif self.game_status == "how_to_play":
-                        back_button_rect = self.draw_how_to_play_screen()
-                        if back_button_rect.collidepoint(mouse_x, mouse_y):
-                            self.game_status = "front"
-
-                    # Check if the button on the about us screen is clicked
-                    elif self.game_status == "about_us":
-                        back_button_rect = self.draw_about_us_screen()
-                        if back_button_rect.collidepoint(mouse_x, mouse_y):
-                            self.game_status = "front"
-
-                    elif self.game_status == "start":
-                        breaker_rect = self.draw_codebreaker()
-                        maker_rect = self.draw_codemaker()
-                        if breaker_rect.collidepoint(mouse_x, mouse_y):
+                        play_button_rect, howToPlay_button_rect, aboutUs_button_rect = self.draw_front_screen()
+                        if play_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to easy
+                            self.game_status = "play"
+                        elif howToPlay_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to average
+                            self.game_status = "howToPlay"
+                        elif aboutUs_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to hard
+                            self.game_status = "aboutUs"
+                    
+                    elif self.game_status == "play":
+                        breaker_button_rect, maker_button_rect = self.draw_start_screen()
+                        if breaker_button_rect.collidepoint(mouse_x, mouse_y):
                             self.game_status = "difficulty"
-                        elif maker_rect.collidepoint(mouse_x, mouse_y):
+                        elif maker_button_rect.collidepoint(mouse_x, mouse_y):
                             self.game_status = "codemaker"
 
+
                     elif self.game_status == "difficulty":
-                        easy_rect, average_rect, hard_rect = self.draw_difficulty_screen()
-                        if easy_rect.collidepoint(mouse_x, mouse_y):
+                        easy_button_rect, average_button_rect, hard_button_rect = self.draw_difficulty_screen()
+                        if easy_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to easy
                             self.set_difficulty("easy")
                             self.game_status = "codebreaker"
-                        elif average_rect.collidepoint(mouse_x, mouse_y):
+                        elif average_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to average
                             self.set_difficulty("average")
                             self.game_status = "codebreaker"
-                        elif hard_rect.collidepoint(mouse_x, mouse_y):
+                        elif hard_button_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to hard
                             self.set_difficulty("hard")
                             self.game_status = "codebreaker"
+
+
+                    # # Check if the button on the how to play screen is clicked
+                    # elif self.game_status == "how_to_play":
+                    #     back_button_rect = self.draw_how_to_play_screen()
+                    #     if back_button_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.game_status = "front"
+
+                    # # Check if the button on the about us screen is clicked
+                    # elif self.game_status == "about_us":
+                    #     back_button_rect = self.draw_about_us_screen()
+                    #     if back_button_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.game_status = "front"
+
+                    # elif self.game_status == "start":
+                    #     breaker_rect = self.draw_codebreaker()
+                    #     maker_rect = self.draw_codemaker()
+                    #     if breaker_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.game_status = "difficulty"
+                    #     elif maker_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.game_status = "codemaker"
+
+                    # elif self.game_status == "difficulty":
+                    #     easy_rect, average_rect, hard_rect = self.draw_difficulty_screen()
+                    #     if easy_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.set_difficulty("easy")
+                    #         self.game_status = "codebreaker"
+                    #     elif average_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.set_difficulty("average")
+                    #         self.game_status = "codebreaker"
+                    #     elif hard_rect.collidepoint(mouse_x, mouse_y):
+                    #         self.set_difficulty("hard")
+                    #         self.game_status = "codebreaker"
 
                     elif self.game_status == "codebreaker":
                         # choosing which colors to play
@@ -456,17 +420,19 @@ class Mastermind:
                                 self.current_hole -= 1
                                 self.guess_grid[6 - self.guesses_left][self.current_hole] = ""
 
+    
+
             SCREEN.blit(BACKGROUND, (0, 0))
             if self.game_status == "front":
                 self.draw_front_screen()
-            elif self.game_status == "start":
+            elif self.game_status == "play":
                 self.draw_start_screen()
-            elif self.game_status == "how_to_play":
-                self.draw_how_to_play_screen()
-            elif self.game_status == "about_us":
+            elif self.game_status == "howToPlay":
+                 self.draw_how_to_play_screen()
+            elif self.game_status == "aboutUs":
                 self.draw_about_us_screen()
-            elif self.game_status == "title":
-                self.draw_difficulty_title()
+            # elif self.game_status == "title":
+            #     self.draw_difficulty_title()
             elif self.game_status == "difficulty":
                 self.draw_difficulty_screen()
             elif self.game_status == "codebreaker":
