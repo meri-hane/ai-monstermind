@@ -25,7 +25,7 @@ class Mastermind:
 
     def draw_front_screen(self):
         SCREEN.blit(BACKGROUND, (0, 0))
-        title_word = TITLE_FONT.render("MASTERMIND", True, (0, 0, 0))
+        title_word = TITLE_FONT.render("FRONT", True, (0, 0, 0))
         title_rect = title_word.get_rect()
         title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
         SCREEN.blit(title_word, title_rect)
@@ -221,7 +221,7 @@ class Mastermind:
     @staticmethod
     def draw_difficulty_title():
         # draw title
-        title_word = TITLE_FONT.render("MASTERMIND", True, (0, 0, 0))
+        title_word = TITLE_FONT.render("3RD MODE", True, (0, 0, 0))
         title_rect = title_word.get_rect()
         title_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 6)
         SCREEN.blit(title_word, title_rect)
