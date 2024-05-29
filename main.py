@@ -23,6 +23,12 @@ class Mastermind:
         self.lookup_table = pickle.load(FileStore)
         FileStore.close()
 
+        # Initialize global variables if not already done
+        global CODEMAKER_ANSWER, COMPUTER_GUESSES, COMPUTER_HINTS
+        CODEMAKER_ANSWER = [""] * 5
+        COMPUTER_GUESSES = [[""] * 5 for _ in range(6)]
+        COMPUTER_HINTS = [[""] * 5 for _ in range(6)]
+
     def draw_front_screen(self):
         SCREEN.blit(BACKGROUND, (0, 0))
         title_word = TITLE_FONT.render("FRONT", True, (0, 0, 0))
@@ -190,6 +196,7 @@ class Mastermind:
         self.draw_button(75, 710, "SUBMIT")
 
     def draw_solver_screen(self):
+        SCREEN.blit(BACKGROUND, (0, 0))  # Clear the screen by blitting the background
         self.draw_guess_grid(GUESS_GRID, 200, 65)
         self.draw_hint_grid(HINT_GRID, 55, 35, self.pegs)
         self.draw_separators()
@@ -197,6 +204,7 @@ class Mastermind:
         self.draw_button(75, SCREEN_HEIGHT - 40, "RESET")
 
     def draw_codemaker_screen(self):
+        SCREEN.blit(BACKGROUND, (0, 0))  # Ensure this matches the way you clear the screen in other methods
 
         # draw explainer text
         instruction_text1 = SUB_TITLE_FONT.render("Choose a secret code", True, (0, 0, 0))
@@ -337,6 +345,14 @@ class Mastermind:
         self.hint_grid = [["" for _ in range(self.pegs)] for _ in range(6)]
         self.answer = random.choices(COLOR_CHOICES, k=self.pegs)
 
+        global GUESS_GRID, HINT_GRID, COMPUTER_GUESSES, COMPUTER_HINTS, CODEMAKER_ANSWER
+        CODEMAKER_ANSWER = ["","","","",""]
+        GUESS_GRID = [["" for _ in range(self.pegs)] for _ in range(6)]
+        HINT_GRID = [["" for _ in range(self.pegs)] for _ in range(6)]
+        COMPUTER_GUESSES = [["" for _ in range(self.pegs)] for _ in range(6)]
+        COMPUTER_HINTS = [["" for _ in range(self.pegs)] for _ in range(6)]
+
+
     def play(self):
         current_time = pg.time.get_ticks()
         self.game_status = "front"  # Set initial game status to "front"
@@ -424,6 +440,7 @@ class Mastermind:
                                 self.reset_game()
 
                     elif self.game_status == "codemaker":
+                        self.pegs = 5
                         # choosing which colors to play
                         choice_rects = self.draw_choices(COLOR_CHOICES, x=SCREEN_WIDTH / 3.75, y=SCREEN_HEIGHT / 2 + 45)
                         for color, rect in zip(COLOR_CHOICES, choice_rects):
