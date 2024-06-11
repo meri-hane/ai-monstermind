@@ -441,7 +441,7 @@ class Mastermind:
 
     def play(self):
         current_time = pg.time.get_ticks()
-        # self.draw_loading_bar()
+        self.draw_loading_bar()
         self.game_status = "front"  # Set initial game status to "front"
         while True:
             for event in pg.event.get():
