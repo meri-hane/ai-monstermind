@@ -9,14 +9,14 @@ from dict_maker import score_guess
 # from stored_objects every time
 class MastermindSolver:
     def __init__(self, answer):
-        self.all_answers = itertools.product(["R", "G", "B", "Y", "P"], repeat=5)
+        self.all_answers = itertools.product(["R", "G", "B", "Y", "P", "O"], repeat=5)
         self.all_answers = {"".join(answer) for answer in self.all_answers}
         self.guesses_left = 6
         self.guess_history = []
         self.hint_history = []
         self.answer = answer
 
-        FileStore = open("stored_objects/score_dict.pickle", "rb")
+        FileStore = open("stored_objects/average.pickle", "rb")
         self.score_dict = pickle.load(FileStore)
         FileStore.close()
 

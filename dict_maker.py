@@ -27,14 +27,14 @@ def score_guess(guess, ans):
 def build_dict():
     # default dict avoids storing keys as tuple, saves lookup time
     score_dict = collections.defaultdict(dict)
-    all_guesses = itertools.product(["R", "G", "B", "Y", "P"], repeat=5)
+    all_guesses = itertools.product(["R", "G", "B", "Y", "P", "O"], repeat=5)
 
     for guess, answer in itertools.product(all_guesses, repeat=2):
         guess_str = "".join(guess)
         ans_str = "".join(answer)
         score_dict[guess_str][ans_str] = score_guess(guess, answer)
 
-    FileStore = open("stored_objects/score_dict.pickle", "wb")
+    FileStore = open("stored_objects/average.pickle", "wb")
     pickle.dump(score_dict, FileStore)
     FileStore.close()
 

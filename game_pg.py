@@ -19,9 +19,12 @@ class Mastermind:
         self.hint_grid = []
         self.answer = []
 
-        FileStore = open("stored_objects/win_dict.pickle", "rb")
+        FileStore = open("stored_objects/average.pickle", "rb")
         self.lookup_table = pickle.load(FileStore)
         FileStore.close()
+        # FileStore = open("stored_objects/easy.pickle", "rb")
+        # self.lookup_table2 = pickle.load(FileStore)
+        # FileStore.close()
 
     def draw_front_screen(self):
         image_rect = COVER.get_rect()
@@ -50,9 +53,9 @@ class Mastermind:
     
     
     def draw_difficulty_screen(self):
-        image_rect = COVER.get_rect()
+        image_rect = COVER1.get_rect()
         image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        SCREEN.blit(COVER, image_rect)
+        SCREEN.blit(COVER1, image_rect)
 
         easy_button_rect = pg.Rect(0, 0, 200, 50)
         easy_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.55)
@@ -66,26 +69,44 @@ class Mastermind:
         average_button_word_rect = average_button_word.get_rect(center=average_button_rect.center)
         SCREEN.blit(average_button_word, average_button_word_rect)
 
-        hard_button_rect = pg.Rect(0, 0, 200, 50)
-        hard_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.21)
-        hard_button_word = SUB_TITLE_FONT.render("HARD", True, (0, 0, 0))
-        hard_button_word_rect = hard_button_word.get_rect(center=hard_button_rect.center)
-        SCREEN.blit(hard_button_word, hard_button_word_rect)
 
-        return easy_button_rect, average_button_rect, hard_button_rect
+        return easy_button_rect, average_button_rect
     
+    def codemaker_difficulty_screen(self):
+        image_rect = COVER1.get_rect()
+        image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        SCREEN.blit(COVER1, image_rect)
+
+        easy_codemaker_rect = pg.Rect(0, 0, 200, 50)
+        easy_codemaker_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.55)
+        easy_codemaker_word = SUB_TITLE_FONT.render("EASY", True, (0, 0, 0))
+        easy_codemaker_word_rect = easy_codemaker_word.get_rect(center=easy_codemaker_rect.center)
+        SCREEN.blit(easy_codemaker_word, easy_codemaker_word_rect)
+
+        average_codemaker_rect = pg.Rect(0, 0, 200, 50)
+        average_codemaker_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.36)
+        average_codemaker_word = SUB_TITLE_FONT.render("AVERAGE", True, (0, 0, 0))
+        average_codemaker_word_rect = average_codemaker_word.get_rect(center=average_codemaker_rect.center)
+        SCREEN.blit(average_codemaker_word, average_codemaker_word_rect)
+
+
+        return easy_codemaker_rect, average_codemaker_rect
+
 
     def draw_how_to_play_screen(self):
+    # Draw instructions image
         image_rect = INSTRUCTIONS.get_rect()
         image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         SCREEN.blit(INSTRUCTIONS, image_rect)
 
+        # Draw title
         title_word = GAME_FONT.render("HOW TO PLAY:", True, (241, 245, 249))
         title_rect = title_word.get_rect()
-        title_rect.center = (SCREEN_WIDTH / 2.2, SCREEN_HEIGHT / 14)
+        title_rect.center = (SCREEN_WIDTH / 2.1, SCREEN_HEIGHT / 11)
         SCREEN.blit(title_word, title_rect)
 
         return 
+
 
     def draw_about_us_screen(self):
         image_rect = ABOUT.get_rect()
@@ -105,8 +126,6 @@ class Mastermind:
             self.pegs = 4
         elif difficulty == "average":
             self.pegs = 5
-        elif difficulty == "hard":
-            self.pegs = 6
         self.reset_game()
 
 
@@ -153,9 +172,10 @@ class Mastermind:
     @staticmethod
     def draw_choices(choice_grid, x, y):
         choice_rects = []
+        pg.draw.rect(SCREEN, (46, 66, 77), (160, 675, 350, 400))
         for val in choice_grid:
             choice_rects.append(pg.draw.circle(SCREEN, GUESS_COLOR_MAP[val], (x, y), GUESS_RADIUS))
-            x += 60
+            x += 50
         return choice_rects
 
     @staticmethod
@@ -225,6 +245,30 @@ class Mastermind:
         self.draw_button(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2 + 150, word="SUBMIT")
 
     
+    def draw_codemaker_easy_screen(self):
+
+        # draw explainer text
+        instruction_text1 = SUB_TITLE_FONT.render("Choose a secret code", True, (0, 0, 0))
+        instruction_rect1 = instruction_text1.get_rect()
+        instruction_rect1.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3.5)
+        SCREEN.blit(instruction_text1, instruction_rect1)
+
+        instruction_text2 = SUB_TITLE_FONT.render("For computer to guess", True, (0, 0, 0))
+        instruction_rect2 = instruction_text2.get_rect()
+        instruction_rect2.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.8)
+        SCREEN.blit(instruction_text2, instruction_rect2)
+
+        # draw secret answer
+        self.draw_guess_grid([CODEMAKER_ANSWER_EASY], x=SCREEN_WIDTH / 3.75, y=SCREEN_HEIGHT / 2 - 30)
+
+        # draw choices
+        self.draw_choices(COLOR_CHOICES, x=SCREEN_WIDTH / 3.75, y=SCREEN_HEIGHT / 2 + 30)
+
+        # draw submit button
+        self.draw_button(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2 + 150, word="SUBMIT")
+
+
+    
     def draw_start_screen(self):
         image_rect = COVER1.get_rect()
         image_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -238,7 +282,7 @@ class Mastermind:
 
         maker_button_rect = pg.Rect(0, 0, 200, 50)
         maker_button_rect.center = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 1.36)
-        maker_button_word = SUB_TITLE_FONT.render("AI vs PLAYER", True, (0, 0, 0))
+        maker_button_word = SUB_TITLE_FONT.render("AI MODE", True, (0, 0, 0))
         maker_button_word_rect = maker_button_word.get_rect(center=maker_button_rect.center)
         SCREEN.blit(maker_button_word, maker_button_word_rect)
 
@@ -306,11 +350,11 @@ class Mastermind:
                         if breaker_button_rect.collidepoint(mouse_x, mouse_y):
                             self.game_status = "difficulty"
                         elif maker_button_rect.collidepoint(mouse_x, mouse_y):
-                            self.game_status = "codemaker"
+                            self.game_status = "codemaker_difficulty"
 
 
                     elif self.game_status == "difficulty":
-                        easy_button_rect, average_button_rect, hard_button_rect = self.draw_difficulty_screen()
+                        easy_button_rect, average_button_rect = self.draw_difficulty_screen()
                         if easy_button_rect.collidepoint(mouse_x, mouse_y):
                             # Set game difficulty to easy
                             self.set_difficulty("easy")
@@ -319,11 +363,17 @@ class Mastermind:
                             # Set game difficulty to average
                             self.set_difficulty("average")
                             self.game_status = "codebreaker"
-                        elif hard_button_rect.collidepoint(mouse_x, mouse_y):
-                            # Set game difficulty to hard
-                            self.set_difficulty("hard")
-                            self.game_status = "codebreaker"
 
+                    elif self.game_status == "codemaker_difficulty":
+                        easy_codemaker_rect, average_codemaker_rect = self.codemaker_difficulty_screen()
+                        if easy_codemaker_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to easy
+                            # self.set_difficulty("easy")
+                            self.game_status = "codemaker_easy"
+                        elif average_codemaker_rect.collidepoint(mouse_x, mouse_y):
+                            # Set game difficulty to average
+                            # self.set_difficulty("average")
+                            self.game_status = "codemaker"
 
                     # # Check if the button on the how to play screen is clicked
                     # elif self.game_status == "how_to_play":
@@ -407,6 +457,25 @@ class Mastermind:
                                     COMPUTER_HINTS[i] = self.validate_guess([let for let in guess], CODEMAKER_ANSWER)
                                 self.game_status = "solver_showcase"
 
+                    elif self.game_status == "codemaker_easy":
+                        # choosing which colors to play
+                        choice_rects = self.draw_choices(COLOR_CHOICES, x=SCREEN_WIDTH / 3.75, y=SCREEN_HEIGHT / 2 + 45)
+                        for color, rect in zip(COLOR_CHOICES, choice_rects):
+                            if rect.collidepoint(mouse_x, mouse_y):
+                                if self.current_hole < 4:
+                                    CODEMAKER_ANSWER_EASY[self.current_hole] = color
+                                    self.current_hole += 1
+
+                        submit_rect = self.draw_button(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 150, "SUBMIT")
+                        if submit_rect.collidepoint(mouse_x, mouse_y):
+                            if self.current_hole == 4:
+                                guesses = self.lookup_table2[tuple(CODEMAKER_ANSWER_EASY)]
+                                self.current_hole = 0
+                                for i, guess in enumerate(guesses):
+                                    COMPUTER_GUESSES_EASY[i] = guess
+                                    COMPUTER_HINTS_EASY[i] = self.validate_guess([let for let in guess], CODEMAKER_ANSWER_EASY)
+                                self.game_status = "solver_showcase"
+
                     elif self.game_status == "solver_showcase":
                         exit_rect = self.draw_button(50, SCREEN_HEIGHT - 40, "RESET")
                         if exit_rect.collidepoint(mouse_x, mouse_y):
@@ -435,11 +504,15 @@ class Mastermind:
             #     self.draw_difficulty_title()
             elif self.game_status == "difficulty":
                 self.draw_difficulty_screen()
+            elif self.game_status == "codemaker_difficulty":
+                self.codemaker_difficulty_screen()
             elif self.game_status == "codebreaker":
                 self.draw_codebreaker_screen()
                 self.draw_win_screen(self.win_status)
             elif self.game_status == "codemaker":
                 self.draw_codemaker_screen()
+            elif self.game_status == "codemaker_easy":
+                self.draw_codemaker_easy_screen()
             elif self.game_status == "solver_showcase":
                 self.draw_solver_screen()
                 if pg.time.get_ticks() - current_time > 1500:
